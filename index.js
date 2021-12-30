@@ -9,7 +9,7 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
-
+//test
 client.on('message', async msg => {
     const msgArr = msg.content.split(" ");
     const player = createAudioPlayer();
@@ -47,15 +47,11 @@ client.on('message', async msg => {
 
             msg.reply('Now playing ' + song.title);
             break;
-            
+
         case '!stop':
             
     }
   });
-
-//make sure this line is the last line
-client.login(process.env.CLIENT_TOKEN); //login bot using token
-
 
 function validURL(str) {
     var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
@@ -66,3 +62,6 @@ function validURL(str) {
       '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
     return !!pattern.test(str);
 }
+
+
+client.login(process.env.CLIENT_TOKEN);
