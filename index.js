@@ -1,6 +1,6 @@
 require('dotenv').config(); //initialize dotenv
 const { Client, Intents } = require('discord.js');
-const { joinVoiceChannel, createAudioPlayer, createAudioResource, NoSubscriberBehavior  } = require('@discordjs/voice');
+const { joinVoiceChannel, createAudioPlayer, createAudioResource, NoSubscriberBehavior, getVoiceConnection  } = require('@discordjs/voice');
 const ytdl = require('ytdl-core-discord');
 const { join } = require('path');
 
@@ -9,7 +9,7 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
-//test
+
 client.on('message', async msg => {
     const msgArr = msg.content.split(" ");
     const player = createAudioPlayer();
@@ -49,6 +49,14 @@ client.on('message', async msg => {
             break;
 
         case '!stop':
+            
+            let connectionStop = getVoiceConnection(msg.member.voice.guild.id);
+
+            if(!connectionStop){
+                msg.reply('Your channel doesn`t have a bot!');
+                break;
+            }
+            
             
     }
   });
